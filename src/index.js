@@ -1,7 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class Item extends React.Component {
+function Item(props) {
+return (
+  <div className="item">
+    <p>{props}</p>
+  </div>
+);
   
 }
 
@@ -12,18 +17,35 @@ class ItemList extends React.Component {
 class AddItem extends React.Component {
  render() {
    return (
-    <div>
-      <input className="inputBox" type="text"></input>
-      <input type="submit"></input>
-    </div>
+    <form onSubmit={this.props.onSubmit}>
+      <input className="inputBox" type="text" onChange={this.props.onChange}></input>
+      <input type="submit" value="Submit"></input>
+    </form>
    );
  }
 }
 
 class List extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      formContent: ''
+    };
+
+  this.onChange = this.onChange.bind(this);
+  this.onSubmit = this.onSubmit.bind(this);
+
+  }
+   onChange(event) {
+      this.setState({formContent: event.target.value});
+    }
+    onSubmit(event) {
+      alert('Submitted:' + this.state.formContent);
+    }
+
   render() {
     return (
-      <AddItem />
+      <AddItem onChange={this.onChange} onSubmit={this.onSubmit} textContent={this.state.formContent}/>
     )
   }
 }
