@@ -10,8 +10,14 @@ return (
   
 }
 
-class ItemList extends React.Component {
+class ItemList extends React.Component { //TODO: add keys
 
+  render() {
+    var listContent = this.props.items.map((item) => <li>{item}</li>);
+    return (
+      <ul>{listContent}</ul>
+    )
+  }
 }
 
 class AddItem extends React.Component {
@@ -29,7 +35,8 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formContent: ''
+      formContent: '',
+      itemList: []
     };
 
   this.onChange = this.onChange.bind(this);
@@ -40,12 +47,27 @@ class List extends React.Component {
       this.setState({formContent: event.target.value});
     }
     onSubmit(event) {
-      alert('Submitted:' + this.state.formContent);
+      this.setState({itemList: [...this.state.itemList, this.state.formContent]})
+      console.log('Submitted: ' + this.state.formContent);
+      this.setState({formContent: ''});
+      event.preventDefault();
     }
 
   render() {
     return (
-      <AddItem onChange={this.onChange} onSubmit={this.onSubmit} textContent={this.state.formContent}/>
+      <div>
+        <div> 
+        <AddItem 
+        onChange={this.onChange} 
+        onSubmit={this.onSubmit} 
+        textContent={this.state.formContent}
+      ></AddItem>
+        </div>
+        <div>
+          <ItemList items={this.state.itemList}></ItemList>
+        </div>
+      </div>
+
     )
   }
 }
