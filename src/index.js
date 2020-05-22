@@ -6,7 +6,7 @@ render () {
   return (
     <div>
         <p>{this.props.text}</p>
-        <input type="button" value="X"></input>
+        <input type="button" value="X" onClick={this.props.onDelete}></input>
     </div>
   );
 }
@@ -15,7 +15,12 @@ render () {
 class ItemList extends React.Component { //TODO: add keys
 
   render() {
-    var listContent = this.props.items.map((item) => <Item text={item}></Item>);
+    var listContent = this.props.items.map((item, index) => <Item
+     text={item} 
+     key={item}
+     onDelete={(i) => this.props.onRemove(index)}
+     ></Item>);
+
     return (
       <ul>{listContent}</ul>
     )
@@ -43,6 +48,7 @@ class List extends React.Component {
 
   this.onChange = this.onChange.bind(this);
   this.onSubmit = this.onSubmit.bind(this);
+  this.onDelete = this.onDelete.bind(this);
 
   }
    onChange(event) {
@@ -56,8 +62,8 @@ class List extends React.Component {
       event.preventDefault();
     }
 
-    onDelete(event, index) {
-      
+    onDelete(index) {
+      alert("Deleted item " + index)
     }
 
   render() {
@@ -71,7 +77,7 @@ class List extends React.Component {
       ></AddItem>
         </div>
         <div>
-          <ItemList items={this.state.itemList}></ItemList>
+          <ItemList items={this.state.itemList} onRemove={(index) => this.onDelete(index)}></ItemList>
         </div>
       </div>
 
