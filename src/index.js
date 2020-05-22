@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function Item(props) {
-return (
-  <div className="item">
-    <p>{props}</p>
-  </div>
-);
-  
+class Item extends React.Component {
+render () {
+  return (
+    <div>
+        <p>{this.props.text}</p>
+        <input type="button" value="X"></input>
+    </div>
+  );
+}
 }
 
 class ItemList extends React.Component { //TODO: add keys
 
   render() {
-    var listContent = this.props.items.map((item) => <li>{item}</li>);
+    var listContent = this.props.items.map((item) => <Item text={item}></Item>);
     return (
       <ul>{listContent}</ul>
     )
@@ -46,11 +48,16 @@ class List extends React.Component {
    onChange(event) {
       this.setState({formContent: event.target.value});
     }
+
     onSubmit(event) {
       this.setState({itemList: [...this.state.itemList, this.state.formContent]})
       console.log('Submitted: ' + this.state.formContent);
       this.setState({formContent: ''});
       event.preventDefault();
+    }
+
+    onDelete(event, index) {
+      
     }
 
   render() {
