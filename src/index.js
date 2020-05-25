@@ -39,22 +39,24 @@ class AddItem extends React.Component {
 }
 
 class List extends React.Component {
+  //contains form content and list of items
   constructor(props) {
     super(props);
     this.state = {
       formContent: '',
       itemList: []
     };
-
+  //binds functions
   this.onChange = this.onChange.bind(this);
   this.onSubmit = this.onSubmit.bind(this);
   this.onDelete = this.onDelete.bind(this);
 
   }
+  //handles text input into entry box
    onChange(event) {
       this.setState({formContent: event.target.value});
     }
-
+    //adds items to the list
     onSubmit(event) {
       this.setState({itemList: [...this.state.itemList, this.state.formContent]})
       console.log('Submitted: ' + this.state.formContent);
@@ -63,7 +65,9 @@ class List extends React.Component {
     }
 
     onDelete(index) {
-      alert("Deleted item " + index)
+      var array = [...this.state.itemList];
+      array.splice(index, 1);
+      this.setState({itemList: array});
     }
 
   render() {
