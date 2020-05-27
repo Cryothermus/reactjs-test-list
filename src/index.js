@@ -38,15 +38,17 @@ class ItemList extends React.Component { //TODO: add keys
 }
 
 class AddItem extends React.Component {
+
  render() {
    return (
     <form id="addItem" onSubmit={this.props.onSubmit}>
       <input id="inputBox" 
       type="text" 
+      value={this.props.textContent}
       onChange={this.props.onChange}
       autoComplete="off">
-
       </input>
+
       <input id="itemSubmit" type="submit" value="Submit"></input>
     </form>
    );
