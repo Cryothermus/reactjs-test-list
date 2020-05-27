@@ -1,12 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './index.css'
 
 class Item extends React.Component {
 render () {
   return (
-    <div>
-        <p>{this.props.text}</p>
-        <input type="button" value="X" onClick={this.props.onDelete}></input>
+    <div className="item">
+        <p 
+        className="itemText"
+        >
+        {this.props.text}
+        </p>
+
+        <input 
+        className="delButton" 
+        type="button" 
+        value="X" 
+        onClick={this.props.onDelete}></input>
     </div>
   );
 }
@@ -22,7 +32,7 @@ class ItemList extends React.Component { //TODO: add keys
      ></Item>);
 
     return (
-      <ul>{listContent}</ul>
+      <ul id="itemList">{listContent}</ul>
     )
   }
 }
@@ -30,9 +40,14 @@ class ItemList extends React.Component { //TODO: add keys
 class AddItem extends React.Component {
  render() {
    return (
-    <form onSubmit={this.props.onSubmit}>
-      <input className="inputBox" type="text" onChange={this.props.onChange}></input>
-      <input type="submit" value="Submit"></input>
+    <form id="addItem" onSubmit={this.props.onSubmit}>
+      <input id="inputBox" 
+      type="text" 
+      onChange={this.props.onChange}
+      autoComplete="off">
+
+      </input>
+      <input id="itemSubmit" type="submit" value="Submit"></input>
     </form>
    );
  }
@@ -53,17 +68,19 @@ class List extends React.Component {
 
   }
   //handles text input into entry box
-   onChange(event) {
+    onChange(event) {
       this.setState({formContent: event.target.value});
     }
     //adds items to the list
     onSubmit(event) {
-      this.setState({itemList: [...this.state.itemList, this.state.formContent]})
-      console.log('Submitted: ' + this.state.formContent);
-      this.setState({formContent: ''});
+      if (this.state.formContent !== '') {
+        this.setState({itemList: [...this.state.itemList, this.state.formContent]})
+        console.log('Submitted: ' + this.state.formContent);
+        this.setState({formContent: ''});
+      }
       event.preventDefault();
     }
-
+    //removes items from the list
     onDelete(index) {
       var array = [...this.state.itemList];
       array.splice(index, 1);
@@ -72,8 +89,8 @@ class List extends React.Component {
 
   render() {
     return (
-      <div>
-        <div> 
+      <div id="list">
+        <div>
         <AddItem 
         onChange={this.onChange} 
         onSubmit={this.onSubmit} 
@@ -90,7 +107,7 @@ class List extends React.Component {
 }
 
 ReactDOM.render(
-    <List />,
+    <List/>,
   document.getElementById('root')
 );
 

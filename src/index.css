@@ -1,0 +1,62 @@
+body {
+    background-color: whitesmoke;
+}
+
+#list {
+    background-color: whitesmoke;
+    min-width: 400px;
+}
+
+#itemList {
+
+}
+
+#addItem {
+    margin-left: 2.5%;
+    height: 15px;
+}
+
+#inputBox {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    width: 89%;
+    float: left;
+
+}
+
+#itemSubmit {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    background-color: darkgrey;
+    /*float: right;*/
+    margin-left: 5px;
+}
+
+.item {
+    border-style: dotted;
+    border-color: lightgrey;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.itemText {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-left: 1%;
+    margin-top: 5px;
+    position: absolute;
+    left: 45px;
+
+}
+
+.delButton {
+    font-family: 'Segoe UI';
+    float: right;
+    background-color: rgba(231, 60, 29, 0.973);
+    border-radius: 5px;
+    border-style: outset;
+}
+
+
+
+
