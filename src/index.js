@@ -56,20 +56,39 @@ class AddItem extends React.Component {
  }
 }
 
+class Notice extends React.Component {
+  render() {
+    if (this.props.noticeText !== '') {
+    return (
+      <div className="notice">
+        <p id="noticeText">
+          {this.props.noticeText}
+        </p>
+      </div>
+    );
+    }
+    else return null; 
+  }
+}
+
 class List extends React.Component {
   //the app as a whole- a list of strings that can be added to and removed
 
   //constructor contains form content and list of items
   constructor(props) {
     super(props);
+    //state of the app
     this.state = {
       formContent: '',
-      itemList: []
+      itemList: [],
+      notice: ''
     };
+
   //binds functions
   this.onChange = this.onChange.bind(this);
   this.onSubmit = this.onSubmit.bind(this);
   this.onDelete = this.onDelete.bind(this);
+  this.showNotice = this.showNotice.bind(this);
 
   }
   //handles manipulation of the input text box
@@ -79,19 +98,34 @@ class List extends React.Component {
 
     //adds items to the list upon submission
     onSubmit(event) {
-      if (this.state.formContent !== '') {
+      if (this.state.itemList.length >= 8) { //if there are too many items in the list
+        this.showNotice("Maximum of 8 items.", 2);
+        this.setState({formContent: ''});
+      }
+      else if (this.state.formContent.length >= 170) { //if the added item is too long
+        this.showNotice("170 characters max", 2);
+        this.setState({formContent: ''});
+      }
+      else if (this.state.formContent !== '') {
         this.setState({itemList: [...this.state.itemList, this.state.formContent]})
         console.log('Submitted: ' + this.state.formContent);
         this.setState({formContent: ''}); //clears the text box upon submission
       }
       event.preventDefault();
     }
+
     //removes items from the list upon clicking the appropriate X button
     onDelete(index) {
       var array = [...this.state.itemList];
       array.splice(index, 1);
       this.setState({itemList: array});
       console.log('Removed item:' + index)
+    }
+
+    //shows a notice (text) for the given number of seconds
+    showNotice(text, seconds) {
+      this.setState({notice: text});
+      setTimeout(() => {this.setState({notice: ''})}, seconds * 1000);
     }
   
   render() {
@@ -104,6 +138,9 @@ class List extends React.Component {
         onSubmit={this.onSubmit} 
         textContent={this.state.formContent}
       ></AddItem>
+        </div>
+        <div>
+          <Notice noticeText={this.state.notice}></Notice>
         </div>
         <div>
           <ItemList items={this.state.itemList} onRemove={(index) => this.onDelete(index)}></ItemList>
