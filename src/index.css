@@ -4,16 +4,17 @@ body {
 
 #list {
     background-color: whitesmoke;
-    min-width: 400px;
+    min-width: 700px;
 }
 
 #itemList {
-
+    margin-top: 5px;
 }
 
 #addItem {
     margin-left: 2.5%;
-    height: 15px;
+    height: 29px; 
+    margin-bottom: 5px;
 }
 
 #inputBox {
@@ -22,7 +23,6 @@ body {
     width: 89%;
     float: left;
     border-radius: 5px;
-
 }
 
 #itemSubmit {
@@ -50,7 +50,7 @@ body {
 .itemText {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    margin-left: 1%;
+    margin-left: 10px;
     margin-top: 5px;
     position: absolute;
     left: 45px;
@@ -69,6 +69,26 @@ body {
     border-style: inset;
 }
 
+#noticeText {
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-left: 1%;
+    margin-top: 5px;
+    position: absolute;
+    left: 45px;
+    font-weight: 700;
+    
 
+}
+
+.notice {
+    margin-left: 2.5%;
+    margin-top: 5px;
+    border-style: solid;
+    border-color: red;
+    height: 30px;
+    border-radius: 5px;
+}
 
 

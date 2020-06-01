@@ -88,7 +88,7 @@ class List extends React.Component {
   this.onChange = this.onChange.bind(this);
   this.onSubmit = this.onSubmit.bind(this);
   this.onDelete = this.onDelete.bind(this);
-  this.showNotice = this.showNotice.bind(this);
+  //this.showNotice = this.showNotice.bind(this); //this is apparently not necessary
 
   }
   //handles manipulation of the input text box
@@ -100,17 +100,18 @@ class List extends React.Component {
     onSubmit(event) {
       if (this.state.itemList.length >= 8) { //if there are too many items in the list
         this.showNotice("Maximum of 8 items.", 2);
-        this.setState({formContent: ''});
       }
       else if (this.state.formContent.length >= 170) { //if the added item is too long
         this.showNotice("170 characters max", 2);
-        this.setState({formContent: ''});
+      }
+      else if (this.state.itemList.indexOf(this.state.formContent) !== -1) {
+        this.showNotice("Item already exists", 2);
       }
       else if (this.state.formContent !== '') {
         this.setState({itemList: [...this.state.itemList, this.state.formContent]})
         console.log('Submitted: ' + this.state.formContent);
-        this.setState({formContent: ''}); //clears the text box upon submission
       }
+      this.setState({formContent: ''}); //clears the text box upon submission
       event.preventDefault();
     }
 
